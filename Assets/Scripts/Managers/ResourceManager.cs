@@ -20,7 +20,7 @@ public class ResourceManager : Singleton<ResourceManager>
         for(int i = 0; i < productTypes.Length; i++)
         {
             productAmounts.Add((ProductType)productTypes.GetValue(i),ES3.Load(productTypes.GetValue(i).ToString(),0));
-            Debug.Log(productTypes.GetValue(i).ToString() + " : " + productAmounts[(ProductType)productTypes.GetValue(i)]);
+            
         }
     }
 
@@ -32,11 +32,14 @@ public class ResourceManager : Singleton<ResourceManager>
     public void AddProductAmount(ProductType productType, int amount)
     {
         productAmounts[productType] += amount;
-        Debug.Log(productType.ToString() + " : " + productAmounts[productType]);
+        EventManager.Instance.ONOnProductAmountChange(productType, productAmounts[productType]);
+        ES3.Save(productType.ToString(), productAmounts[productType]);
     }
 
     public void RemoveProductAmount(ProductType productType, int amount)
     {
         productAmounts[productType] -= amount;
+        EventManager.Instance.ONOnProductAmountChange(productType, productAmounts[productType]);
+        ES3.Save(productType.ToString(), productAmounts[productType]);
     }
 }

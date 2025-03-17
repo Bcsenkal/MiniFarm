@@ -9,11 +9,10 @@ public class InputTracker : MonoBehaviour, IPointerClickHandler
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         IClickable target = null;
-        if(Physics.Raycast(ray, out var hit, 100f))
+        if(Physics.Raycast(ray, out var hit, 300f))
         {
             target = hit.transform.GetComponent<IClickable>();
             target?.OnClick();
-            
         }
         Managers.EventManager.Instance.ONOnClick(target);
     }

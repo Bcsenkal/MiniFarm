@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 977102edc5743704a95be41957da6146, type: 3}
-  m_Name: BreadV2
+  m_Script: {fileID: 11500000, guid: bf6cbd925a3d2b74582cf6804238565b, type: 3}
+  m_Name: BreadFactoryV2
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 11d51e1b08e7d4a5d9e8935346113980, type: 3}
-  type: 2
-  hasPrerequisites: 1
-  id: 3
-  prerequisites:
+  inputProducts:
   - product: {fileID: 11400000, guid: d006333512860de4baca5628ef5c846e, type: 2}
     amount: 1
+  outputProduct: {fileID: 11400000, guid: fbf17675e2a37eb4b9d96d0b3fa1959b, type: 2}
+  outputAmount: 1
+  capacity: 10
+  productionTime: 90

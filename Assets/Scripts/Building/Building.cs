@@ -15,21 +15,10 @@ public struct Requirement
     public int amount;
 }
 
-[Serializable]
-public struct ProductionData
-{
-    public Product product;
-    public int productionAmount;
-    public int productionTime;
-    public int capacity;
-    public bool isRaw;
-    [HideIf("isRaw")]public List<Requirement> prerequisites;
-}
-
 public class Building : MonoBehaviour, IClickable
 {
     [SerializeField] protected BuildingType buildingType;
-    [SerializeField] protected ProductionData productionData;
+    [SerializeField] protected BuildingData buildingData;
     protected ProductionHandler productionHandler;
     protected ProductionInfo productionInfo;
     public bool IsSelected{ get; set; }
@@ -43,18 +32,28 @@ public class Building : MonoBehaviour, IClickable
 
     public virtual void Start()
     {
-        Managers.EventManager.Instance.OnClick += CloseUIElements;
-    }
-
-    public virtual void CloseUIElements(IClickable clickable)
-    {
-        if(clickable as Building == this) return;
-        IsSelected = false;
+        Managers.EventManager.Instance.OnBuildingSelect += OnBuildingSelect;
     }
 
     public virtual void OnClick()
     {
-        IsSelected = true;
+        if(buildingType == BuildingType.Generator || IsSelected)
+        {
+            Harvest();
+        }
+        Managers.EventManager.Instance.ONOnBuildingSelect(this);
+    }
+
+    protected void OnBuildingSelect(Building building)
+    {
+        IsSelected = building == this;
+    }
+
+    protected void Harvest()
+    {
+        productionHandler.Harvest();
+        if(buildingType == BuildingType.Generator) return;
+        productionInfo.CheckProduction(productionHandler.HasQueue(),productionHandler.CanGetHarvested());
     }
 
     public BuildingType GetBuildingType()
@@ -62,9 +61,9 @@ public class Building : MonoBehaviour, IClickable
         return buildingType;
     }
 
-    public ProductionData GetProductionData()
+    public BuildingData GetBuildingData()
     {
-        return productionData;
+        return buildingData;
     }
 
     public void UpdateTime(float timeLeft, float timeToProduce)
@@ -72,9 +71,51 @@ public class Building : MonoBehaviour, IClickable
         productionInfo.UpdateTime(timeLeft, timeToProduce);
     }
 
-    public void UpdateAmount(int currentAmount)
+    public void UpdateAmount(int currentAmount,int queuedAmount)
     {
-        productionInfo.UpdateAmount(currentAmount);
+        productionInfo.UpdateAmount(currentAmount,queuedAmount);
+    }
+
+    public bool HasEnoughMaterials()
+    {
+        var result = true;
+        foreach(var requirement in buildingData.inputProducts)
+        {
+            if(ResourceManager.Instance.GetProductAmount(requirement.product.type) < requirement.amount)
+            {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public void AddProduction()
+    {
+        productionHandler.AddProduction();
+        productionInfo.CheckProduction(productionHandler.HasQueue(),productionHandler.CanGetHarvested());
+    }
+
+    public void RemoveProductionFromQueue()
+    {
+        productionHandler.RemoveProduction();
+        productionInfo.CheckProduction(productionHandler.HasQueue(),productionHandler.CanGetHarvested());
+    }
+
+    public bool HasQueue()
+    {
+        if(buildingType == BuildingType.Generator) return true;
+        return productionHandler.HasQueue();
+    }
+
+    public bool CanGetHarvested()
+    {
+        return productionHandler.CanGetHarvested();
+    }
+
+    public bool IsMaxCapacity()
+    {
+        return productionHandler.IsMaxCapacity();
     }
 
     public void IsFull()

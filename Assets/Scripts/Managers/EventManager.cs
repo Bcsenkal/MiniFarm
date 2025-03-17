@@ -5,39 +5,6 @@ namespace Managers
 {
     public sealed class EventManager : Singleton<EventManager>
     {
-        
-#region Level Status
-
-        //DEFINE
-        public event System.Action<bool> ONLevelEnd;
-        public event System.Action ONLevelStart;
-        
-        //FUNCS
-        public void OnONLevelStart(){
-            ONLevelStart?.Invoke();
-        }
-        public void OnONLevelEnd(bool isSuccess)
-        {
-            ONLevelEnd?.Invoke(isSuccess);
-        }
-        
-        public event System.Action ONLevelReload;
-
-        public void OnONLevelReload()
-        {
-            ONLevelReload?.Invoke();
-        }
-        
-        public event System.Action ONLevelComplete;
-
-        public void OnONLevelComplete()
-        {
-            ONLevelComplete?.Invoke();
-        }
-        
-       
-
-#endregion
         //*********************************************************************
         #region VFX
         //DEFINE
@@ -70,19 +37,43 @@ namespace Managers
 
         #endregion
         //*********************************************************************
-        #region Resource
-
+        #region Production
+        public event System.Action<ProductType, int> OnProductAmountChange;
+        public event System.Action OnProductionQueueChange;
+        public event System.Action OnProductionComplete;
         
+
+        public void ONOnProductAmountChange(ProductType type, int amount)
+        {
+            OnProductAmountChange?.Invoke(type, amount);
+        }
+
+        public void ONOnProductionQueueChange()
+        {
+            OnProductionQueueChange?.Invoke();
+        }
+
+        public void ONOnProductionComplete()
+        {
+            OnProductionComplete?.Invoke();
+        }
+            
 
         #endregion
         //*********************************************************************
         #region Input
 
         public event System.Action<IClickable> OnClick;
+        public event System.Action<Building> OnBuildingSelect;
 
         public void ONOnClick(IClickable clickable)
         {
             OnClick?.Invoke(clickable);
+        }
+
+        public void ONOnBuildingSelect(Building building)
+        {
+            OnBuildingSelect?.Invoke(building);
         }
         #endregion
         
@@ -97,12 +88,7 @@ namespace Managers
         //remove listeners from all of the events here
         public void NextLevelReset()
         {
-            ONLevelStart= null;
-            ONLevelEnd = null;
-            ONLevelComplete = null;
-            ONLevelReload = null;
-            
-            
+
             //VFX
             ONPlayParticleHere = null;
             
@@ -110,11 +96,13 @@ namespace Managers
             //Settings
             ONSettingsButtonPressed = null;
             ONSettingsPanelOpened = null;
-            
-            
-            
+
             //Resource
-            
+            OnProductAmountChange = null;
+
+            //Input
+            OnClick = null;
+            OnBuildingSelect = null;
             
         }
 

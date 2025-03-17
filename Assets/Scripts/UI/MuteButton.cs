@@ -25,13 +25,6 @@ namespace UI
             
             _button = GetComponent<Button>();
             _button.onClick.AddListener(MuteSound);
-            
-            EventManager.Instance.ONLevelEnd += ONLevelEnd;
-        }
-
-        private void ONLevelEnd(bool obj)
-        {
-            _button.onClick.RemoveListener(MuteSound);
         }
 
         private void MuteSound()

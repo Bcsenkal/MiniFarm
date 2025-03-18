@@ -19,3 +19,4 @@ MonoBehaviour:
   outputAmount: 1
   capacity: 10
   productionTime: 90
+  buildingName: BreadFactoryV2

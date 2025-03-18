@@ -18,4 +18,5 @@ public class BuildingData : ScriptableObject
     public int outputAmount;
     public int capacity;
     public float productionTime;
+    public string buildingName;
 }

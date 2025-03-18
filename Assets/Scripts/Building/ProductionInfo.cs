@@ -36,6 +36,11 @@ public class ProductionInfo : MonoBehaviour
     {
         cam = Camera.main;
         transform.LookAtCamera(cam);
+        Invoke(nameof(CheckVisibility),0.1f);
+    }
+
+    private void CheckVisibility()
+    {
         CheckProduction(building.HasQueue(),building.CanGetHarvested());
     }
 
@@ -46,6 +51,12 @@ public class ProductionInfo : MonoBehaviour
 
     public void UpdateTime(float timeLeft, float timeToProduce)
     {
+        if(timeLeft < -0.9f)
+        {
+            progressText.text = "";
+            progressFill.value = 0;
+            return;
+        }
         progressFill.value = 1 - timeLeft / timeToProduce;
         stringBuilder.Clear();
         stringBuilder.Append(Mathf.CeilToInt(timeLeft));
@@ -57,6 +68,7 @@ public class ProductionInfo : MonoBehaviour
     {
         currentAmountText.text = currentAmount.ToString();
         if(isGenerator) return;
+        
         stringBuilder.Clear();
         stringBuilder.Append(qeuedAmount + currentAmount);
         stringBuilder.Append("/");

@@ -16,4 +16,5 @@ MonoBehaviour:
   outputProduct: {fileID: 11400000, guid: 20b060d6f6bc8d1438e9d223f912e78e, type: 2}
   outputAmount: 1
   capacity: 5
-  productionTime: 2
+  productionTime: 20
+  buildingName: HayFactory

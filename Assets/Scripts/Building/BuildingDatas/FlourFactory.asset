@@ -18,4 +18,5 @@ MonoBehaviour:
   outputProduct: {fileID: 11400000, guid: d006333512860de4baca5628ef5c846e, type: 2}
   outputAmount: 1
   capacity: 10
-  productionTime: 10
+  productionTime: 40
+  buildingName: FlourFactory

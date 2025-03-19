@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d5f9bee3624fe6642bc23ec673ee69f4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 235001
+  packageName: UI Particle Image
+  packageVersion: 1.2.2
+  assetPath: Assets/AssetKits/ParticleImage/Demo/Prefabs/_Primitives/AttractorBurst.prefab
+  uploadId: 620919

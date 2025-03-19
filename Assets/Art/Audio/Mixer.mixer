@@ -76,6 +76,8 @@ AudioMixerController:
   m_Snapshots:
   - {fileID: 24500006}
   - {fileID: -6600421659906817257}
+  - {fileID: 8826120386110492763}
+  - {fileID: 7738839466109864261}
   m_StartSnapshot: {fileID: 24500006}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
@@ -170,6 +172,32 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!245 &7738839466109864261
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SfxMutedSnapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 1baa5a2637a4fb6458070f475177f26a
+  m_FloatValues:
+    51423c90434b4f4428cf6aa3831f0342: -80
+    7e3a5724e5fcd93469594787a3677890: -80
+    638c08be7feb8a84a8b52cd926ff7563: -0.002441872
+  m_TransitionOverrides: {}
+--- !u!245 &8826120386110492763
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MusicMutedSnapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: ab6d56f3cd058004fbd9a5b463367ab2
+  m_FloatValues:
+    638c08be7feb8a84a8b52cd926ff7563: -80
+  m_TransitionOverrides: {}
 --- !u!244 &9057034275719560805
 AudioMixerEffectController:
   m_ObjectHideFlags: 3

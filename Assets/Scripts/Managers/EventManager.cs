@@ -1,36 +1,25 @@
 
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Managers
 {
     public sealed class EventManager : Singleton<EventManager>
     {
         //*********************************************************************
-        #region VFX
-        //DEFINE
-        public event System.Action<Vector3> ONPlayParticleHere;
-        
-        //FUNCS
-        public void OnONPlayParticleHere(Vector3 position)
-        {
-            ONPlayParticleHere?.Invoke(position);
-        }
-        #endregion
-        //*********************************************************************
         #region Settings
 
-        public event System.Action ONSettingsButtonPressed;
+        public event System.Action OnOpenSettingsPanel;
+        public event System.Action OnCloseSettingsPanel;
 
-        public void OnONSettingsButtonPressed()
+        public void ONOnOpenSettingsPanel()
         {
-            ONSettingsButtonPressed?.Invoke();
+            OnOpenSettingsPanel?.Invoke();
         }
 
-        public event System.Action<bool> ONSettingsPanelOpened;
-
-        public void OnONSettingsPanelOpened(bool isOpen)
+        public void ONOnCloseSettingsPanel()
         {
-            ONSettingsPanelOpened?.Invoke(isOpen);
+            OnCloseSettingsPanel?.Invoke();
         }
                 
         
@@ -61,6 +50,23 @@ namespace Managers
 
         #endregion
         //*********************************************************************
+
+        #region Particle
+        public event System.Action<Product,int> OnCallProductParticle;
+        public event System.Action<Product,Vector3,int> OnShowParticle;
+
+        public void ONOnCallProductParticle(Product product,int amount)
+        {
+            OnCallProductParticle?.Invoke(product,amount);
+        }
+        
+        public void ONOnShowParticle(Product product,Vector3 position,int amount)
+        {
+            OnShowParticle?.Invoke(product,position,amount);
+        }
+
+        #endregion
+        //*********************************************************************
         #region Input
 
         public event System.Action<IClickable> OnClick;
@@ -76,34 +82,24 @@ namespace Managers
             OnBuildingSelect?.Invoke(building);
         }
         #endregion
-        
-
-
-
-
-
-
 
 
         //remove listeners from all of the events here
         public void NextLevelReset()
         {
-
-            //VFX
-            ONPlayParticleHere = null;
-            
-            
             //Settings
-            ONSettingsButtonPressed = null;
-            ONSettingsPanelOpened = null;
+            OnOpenSettingsPanel = null;
+            OnCloseSettingsPanel = null;
 
-            //Resource
+            //Production
             OnProductAmountChange = null;
+            OnProductionQueueChange = null;
+            OnProductionComplete = null;
 
             //Input
             OnClick = null;
             OnBuildingSelect = null;
-            
+
         }
 
 

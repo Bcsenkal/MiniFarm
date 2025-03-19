@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4792637129100178784}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7846746389225726052}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &6366522367355958786
 AudioSource:
@@ -152,6 +152,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6268937441201283257}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -161,7 +162,6 @@ Transform:
   - {fileID: 2521145238173272966}
   - {fileID: 18550730489083238}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5719392506841041748
 MonoBehaviour:
@@ -178,12 +178,13 @@ MonoBehaviour:
   musicSource: {fileID: 7780827255812520444}
   sfxSource: {fileID: 6366522367355958786}
   extraSfxSource: {fileID: 13730261397722651}
-  musicClip: {fileID: 0}
+  musicClip: {fileID: 8300000, guid: 1a1adaabb3e053b43980dcad4d714366, type: 3}
   winMusic: {fileID: 8300000, guid: 8a245c37f1a0e4be5bb4df8ddd28744d, type: 3}
   failMusic: {fileID: 8300000, guid: e1eb979e7058b4a31b96e0ce38675985, type: 3}
-  collectSfx: {fileID: 8300000, guid: d51a07d756d7a4db590629fe6efa128b, type: 3}
+  collectSfx: {fileID: 8300000, guid: a6b04793d82c05740b1623d0350dac4e, type: 3}
   buttonClickSfx: {fileID: 8300000, guid: 9de16190311904448b226aae7b7ebcce, type: 3}
-  rocinanteSfx: {fileID: 8300000, guid: 2dcec90bc762f40a39db727f8dd00dce, type: 3}
+  positiveButtonClickSfx: {fileID: 8300000, guid: 98eee364ce8c2e148bc6d7618ec2fdc3, type: 3}
+  negativeButtonClickSfx: {fileID: 8300000, guid: 2c2be72a4e88f9446a87a6d399c2df5f, type: 3}
 --- !u!1 &7290227376890466420
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,13 +209,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7290227376890466420}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7846746389225726052}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &13730261397722651
 AudioSource:
@@ -336,13 +337,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7536940720114383120}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7846746389225726052}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7780827255812520444
 AudioSource:

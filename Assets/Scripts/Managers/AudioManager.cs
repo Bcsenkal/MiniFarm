@@ -7,13 +7,6 @@ namespace Managers
     public class AudioManager : Singleton<AudioManager>
     {
         
-        [BoxGroup("MixerSnapshots")] 
-        [SerializeField] private AudioMixerSnapshot normalSnapshot;
-        [BoxGroup("MixerSnapshots")] 
-        [SerializeField] private AudioMixerSnapshot mutedSnapshot;
-        [BoxGroup("MixerSnapshots")] 
-        [SerializeField] private AudioMixerSnapshot musicMutedSnapshot;
-        
         [Header("Audio Sources")]
         [SerializeField] private AudioSource musicSource;
         [SerializeField] private AudioSource sfxSource;
@@ -26,43 +19,26 @@ namespace Managers
         [SerializeField] private AudioClip failMusic;
         [SerializeField] private AudioClip collectSfx;
         [SerializeField] private AudioClip buttonClickSfx;
-        [SerializeField] private AudioClip rocinanteSfx;
+
+        [SerializeField] private AudioClip positiveButtonClickSfx;
+        [SerializeField] private AudioClip negativeButtonClickSfx;
 
         #region Snapshot Functions
 
-        public void MuteSound(bool isMuted)
+        public void SetMusicVolume(float volume)
         {
-            
-            if (isMuted)
-            {
-                mutedSnapshot.TransitionTo(.2f);
-            }
-            else
-            {
-                normalSnapshot.TransitionTo(.2f);
-            }
-
-
+            musicSource.volume = volume;
         }
-        
-        public void MuteMusic(bool isMuted)
+
+        public void SetSFXVolume(float volume)
         {
-            
-            if (isMuted)
-            {
-                musicMutedSnapshot.TransitionTo(.2f);
-            }
-            else
-            {
-                normalSnapshot.TransitionTo(.2f);
-            }
-
-
+            sfxSource.volume = volume;
+            extraSfxSource.volume = volume;
         }
 
         #endregion
 
-#region Music
+        #region Music
 
         public void PlayMusic(bool isPlaying)
         {
@@ -90,19 +66,30 @@ namespace Managers
             musicSource.loop = false;
             musicSource.PlayOneShot(winMusic);
         }
-#endregion
+        #endregion
 
-#region SFX
+        #region SFX
 
         public void PlayButtonClick()
         {
             sfxSource.PlayOneShot(buttonClickSfx);
         }
 
-        public void PlayRocinanteSfx(){
-            sfxSource.PlayOneShot(rocinanteSfx);
+        public void PlayPositiveButtonClick()
+        {
+            sfxSource.PlayOneShot(positiveButtonClickSfx);
+        }
+        
+        public void PlayNegativeButtonClick()
+        {
+            sfxSource.PlayOneShot(negativeButtonClickSfx);
+        }
+        
+        public void PlayCollectSfx()
+        {
+            extraSfxSource.PlayOneShot(collectSfx);
         }
 
-#endregion
+        #endregion
     }
 }

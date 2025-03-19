@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Text;
+using Managers;
 
 public class AddProductbutton : ProductionButton
 {
@@ -22,6 +21,7 @@ public class AddProductbutton : ProductionButton
     protected void AddProduction()
     {
         currentSelection.AddProduction();
+        AudioManager.Instance.PlayPositiveButtonClick();
     }
 
     // Since all productions only need one material, I used index of 0, but in case of multiple materials, it can be changed as list of images and for loop

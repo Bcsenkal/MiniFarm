@@ -59,7 +59,7 @@ namespace Managers
         {
             OnCallProductParticle?.Invoke(product,amount);
         }
-        
+
         public void ONOnShowParticle(Product product,Vector3 position,int amount)
         {
             OnShowParticle?.Invoke(product,position,amount);
@@ -95,6 +95,11 @@ namespace Managers
             OnProductAmountChange = null;
             OnProductionQueueChange = null;
             OnProductionComplete = null;
+
+            //Particle
+            OnCallProductParticle = null;
+            OnShowParticle = null;
+            
 
             //Input
             OnClick = null;

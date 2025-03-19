@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class HayFactory : Building
 {
-
+    //added for potential additional functionality
 }

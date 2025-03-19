@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace Managers
 {
+    //Simple event bus to handle all the events in the game
     public sealed class EventManager : Singleton<EventManager>
     {
         //*********************************************************************
@@ -99,7 +100,7 @@ namespace Managers
             //Particle
             OnCallProductParticle = null;
             OnShowParticle = null;
-            
+
 
             //Input
             OnClick = null;

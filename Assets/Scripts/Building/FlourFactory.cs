@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class FlourFactory : Building 
 {
-    
+    //added for potential additional functionality
 }

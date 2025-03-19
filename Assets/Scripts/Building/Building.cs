@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
+
 public enum BuildingType
 {
     Spender,
     Generator
 }
+
 [Serializable]
 public struct Requirement
 {
@@ -21,8 +23,7 @@ public class Building : MonoBehaviour, IClickable
     [SerializeField] protected BuildingData buildingData;
     protected ProductionHandler productionHandler;
     protected ProductionInfo productionInfo;
-    public bool IsSelected{ get; set; }
-
+    public bool IsSelected { get; set; }
 
     protected virtual void Awake()
     {
@@ -37,7 +38,7 @@ public class Building : MonoBehaviour, IClickable
 
     public virtual void OnClick()
     {
-        if(buildingType == BuildingType.Generator || IsSelected)
+        if (buildingType == BuildingType.Generator || IsSelected)
         {
             Harvest();
         }
@@ -52,8 +53,8 @@ public class Building : MonoBehaviour, IClickable
     protected void Harvest()
     {
         productionHandler.Harvest();
-        if(buildingType == BuildingType.Generator) return;
-        productionInfo.CheckProduction(productionHandler.HasQueue(),productionHandler.CanGetHarvested());
+        if (buildingType == BuildingType.Generator) return;
+        productionInfo.CheckProduction(productionHandler.HasQueue(), productionHandler.CanGetHarvested());
     }
 
     public BuildingType GetBuildingType()
@@ -71,17 +72,17 @@ public class Building : MonoBehaviour, IClickable
         productionInfo.UpdateTime(timeLeft, timeToProduce);
     }
 
-    public void UpdateAmount(int currentAmount,int queuedAmount)
+    public void UpdateAmount(int currentAmount, int queuedAmount)
     {
-        productionInfo.UpdateAmount(currentAmount,queuedAmount);
+        productionInfo.UpdateAmount(currentAmount, queuedAmount);
     }
 
     public bool HasEnoughMaterials()
     {
         var result = true;
-        foreach(var requirement in buildingData.inputProducts)
+        foreach (var requirement in buildingData.inputProducts)
         {
-            if(ResourceManager.Instance.GetProductAmount(requirement.product.type) < requirement.amount)
+            if (ResourceManager.Instance.GetProductAmount(requirement.product.type) < requirement.amount)
             {
                 result = false;
                 break;
@@ -93,18 +94,18 @@ public class Building : MonoBehaviour, IClickable
     public void AddProduction()
     {
         productionHandler.AddProduction();
-        productionInfo.CheckProduction(productionHandler.HasQueue(),productionHandler.CanGetHarvested());
+        productionInfo.CheckProduction(productionHandler.HasQueue(), productionHandler.CanGetHarvested());
     }
 
     public void RemoveProductionFromQueue()
     {
         productionHandler.RemoveProduction();
-        productionInfo.CheckProduction(productionHandler.HasQueue(),productionHandler.CanGetHarvested());
+        productionInfo.CheckProduction(productionHandler.HasQueue(), productionHandler.CanGetHarvested());
     }
 
     public bool HasQueue()
     {
-        if(buildingType == BuildingType.Generator) return true;
+        if (buildingType == BuildingType.Generator) return true;
         return productionHandler.HasQueue();
     }
 

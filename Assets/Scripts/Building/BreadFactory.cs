@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class BreadFactory : Building
 {
-    
+    //added for potential additional functionality
 }

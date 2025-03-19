@@ -22,6 +22,7 @@ public class ProductionHandler : MonoBehaviour
 
     void Awake()
     {
+        // Initialize building and production data
         building = GetComponent<Building>();
         productionData = building.GetBuildingData();
         isGenerator = productionData.inputProducts.Count <= 0;
@@ -30,6 +31,7 @@ public class ProductionHandler : MonoBehaviour
 
     private void Start()
     {
+        // Load the production state and start production if necessary
         LoadProductionState();
         if(!isGenerator && queuedAmount <= 0) return;
         StartProduction().Forget();
@@ -37,6 +39,7 @@ public class ProductionHandler : MonoBehaviour
 
     private void LoadProductionState()
     {
+        // Load the last production start time if it exists
         if(ES3.KeyExists(GetSaveKey("LastProductionStartTime")))
         {
             lastProductStartTime = ES3.Load<DateTime>(GetSaveKey("LastProductionStartTime"));
@@ -48,9 +51,11 @@ public class ProductionHandler : MonoBehaviour
             isProducing = false;
         }
 
+        // Load queued and current amounts
         queuedAmount = ES3.Load<int>(GetSaveKey("QueuedAmount"), 0);
         currentAmount = ES3.Load<int>(GetSaveKey("CurrentAmount"), 0);
 
+        // Process elapsed time if production was ongoing
         if (isProducing)
         {
             TimeSpan elapsedTime = DateTime.UtcNow - lastProductStartTime;
@@ -61,6 +66,7 @@ public class ProductionHandler : MonoBehaviour
             building.UpdateTime(-1, productionData.productionTime);
         }
 
+        // Update building state
         building.UpdateAmount(currentAmount, queuedAmount);
         if(currentAmount >= productionData.capacity) building.IsFull();
     }
@@ -69,6 +75,7 @@ public class ProductionHandler : MonoBehaviour
     {
         if (elapsedSeconds <= 0) return;
 
+        // Process elapsed time based on whether the building is a generator or spender
         if(isGenerator)
         {
             ProcessGeneratorElapsedTime(elapsedSeconds);
@@ -81,9 +88,11 @@ public class ProductionHandler : MonoBehaviour
 
     private void ProcessGeneratorElapsedTime(double elapsedSeconds)
     {
+        // Calculate completed productions and remaining time
         int completedProductions = (int)(elapsedSeconds / productionData.productionTime);
         float remainingTime = (float)(elapsedSeconds % productionData.productionTime);
         
+        // Update current amount and check capacity
         currentAmount += completedProductions;
         currentAmount = Mathf.Min(currentAmount, productionData.capacity);
 
@@ -93,6 +102,7 @@ public class ProductionHandler : MonoBehaviour
             return;
         }
 
+        // Set production complete time if there is remaining time
         if (remainingTime > 0)
         {
             isProducing = true;
@@ -103,6 +113,7 @@ public class ProductionHandler : MonoBehaviour
 
     private void ProcessSpenderElapsedTime(double elapsedSeconds)
     {
+        // Calculate completed productions and remaining time
         int completedProductions = (int)(elapsedSeconds / productionData.productionTime);
         float remainingTime = (float)(elapsedSeconds % productionData.productionTime);
 
@@ -116,6 +127,7 @@ public class ProductionHandler : MonoBehaviour
             return;
         }
 
+        // Set production complete time if there is remaining time and queued amount
         if (remainingTime > 0 && queuedAmount > 0)
         {
             isProducing = true;

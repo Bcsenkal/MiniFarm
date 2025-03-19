@@ -182,6 +182,10 @@ public class ProductionHandler : MonoBehaviour
         if(!isGenerator && queuedAmount > 0)
         {
             queuedAmount--;
+            if(queuedAmount == 0)
+            {
+                building.UpdateTime(-1, productionData.productionTime);
+            }
         }
         
         currentAmount = Mathf.Min(currentAmount + productionData.outputAmount, productionData.capacity);

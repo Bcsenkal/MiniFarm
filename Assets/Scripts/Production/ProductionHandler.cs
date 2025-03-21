@@ -117,6 +117,7 @@ public class ProductionHandler : MonoBehaviour
         int completedProductions = (int)(elapsedSeconds / productionData.productionTime);
         float remainingTime = (float)(elapsedSeconds % productionData.productionTime);
 
+        completedProductions = Mathf.Min(completedProductions, queuedAmount);
         queuedAmount = Mathf.Max(0, queuedAmount - completedProductions);
         currentAmount += completedProductions * productionData.outputAmount;
         currentAmount = Mathf.Min(currentAmount, productionData.capacity);
@@ -132,6 +133,11 @@ public class ProductionHandler : MonoBehaviour
         {
             isProducing = true;
             productionCompleteTime = Time.time + (productionData.productionTime - remainingTime);
+        }
+        else
+        {
+            isProducing = false;
+            building.UpdateTime(-1, productionData.productionTime);
         }
     }
 
